@@ -1,0 +1,17 @@
+runtime: nodejs20
+service: default
+
+handlers:
+  # Serve all static files (JS, CSS, images) from the build directory
+  - url: /(.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|json))
+    static_files: dist/\1
+    upload: dist/(.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|json))
+    secure: always
+    redirect_http_response_code: 301
+
+  # Serve index.html for all other routes (client-side routing)
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
+    secure: always
+    redirect_http_response_code: 301

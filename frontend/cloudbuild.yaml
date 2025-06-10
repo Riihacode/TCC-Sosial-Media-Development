@@ -1,0 +1,21 @@
+steps:
+  - name: "node:22"
+    dir: "cloud_computing/frontend"
+    entrypoint: "npm"
+    args: ["install"]
+
+  - name: "node:22"
+    dir: "cloud_computing/frontend"
+    entrypoint: "npm"
+    args: ["run", "build"]
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - "gcloud app deploy cloud_computing/frontend/app.yaml --quiet"
+
+timeout: "1600s"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
