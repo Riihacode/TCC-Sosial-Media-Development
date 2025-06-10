@@ -261,6 +261,7 @@ async function uploadVideo(req, res) {
     req.pipe(busboy);
 
     try {
+        console.log("📥 Incoming request:", req.body, req.file);
         await parseForm();
 
         if (uploadError) return res.status(400).json({ error: uploadError });
